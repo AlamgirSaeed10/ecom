@@ -21,19 +21,33 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $title ="Index"; 
+        return view('index',compact('title'));
     }
     public function courses()
     {
-        return view('courses');
+        $title ="Our Courses"; 
+        return view('courses',compact('title'));
+    }
+    public function services()
+    {
+        $title ="Our Services"; 
+        return view('services',compact('title'));
     }
     public function about()
     {
-        return view('about');
+        $title ="About Us"; 
+        return view('about',compact('title'));
     }
     public function enrollment()
     {
-        return view('enrollment');
+        $title ="Enrollment"; 
+        return view('enrollment',compact('title'));
+    }
+    public function sitemap()
+    {
+        $title ="Our Sitemap"; 
+        return view('sitemap',compact('title'));
     }
 
     public function post_enrollment(EnrollmentRequest $request)
@@ -85,7 +99,8 @@ class HomeController extends Controller
     }
     public function contact()
     {
-        return view('contact');
+        $title="Contact Us";
+        return view('contact',compact('title'));
     }
     public function contact_us_mail(ContactRequest $request)
     {
@@ -104,12 +119,10 @@ class HomeController extends Controller
         return redirect()->back()
             ->with(['success' => 'Thank you for contacting us. We will contact you shortly.']);
     }
-
     public function maintenance()
     {
         return view('maintenance');
     }
-
     public function contactUsEmail(MaintenanceRequest $request)
     {
         if (!$request->validated()) {

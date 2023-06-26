@@ -10,7 +10,8 @@ class EnrollmentController extends Controller
 {
 
     public function enrollment(){
-        return view('enrollment');
+        $title="Student Enrollment";
+        return view('enrollment',compact('title'));
     }
 
     public function post_enrollment(Request $request){

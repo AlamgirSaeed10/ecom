@@ -1,4 +1,5 @@
 @extends('include.master')
+@section('title',$title)
 @section('content')
     <div class="courses-area section-padding40 fix mt-100">
         <div class="container">

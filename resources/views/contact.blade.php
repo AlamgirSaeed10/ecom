@@ -1,4 +1,5 @@
 @extends('include.master')
+@section('title',$title)
 @section('content')
     <section class="py-5 mt-100">
         <div class="container">

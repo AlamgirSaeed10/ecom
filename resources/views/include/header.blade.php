@@ -40,14 +40,12 @@
                                         <ul id="navigation">
                                             <li class="active"><a href="{{ route('about.page') }}">About Us</a></li>
                                             <li> <a href="{{ route('courses.page') }}">Courses </a></li>
-                                            <li><a href="{{ route('contact.page') }}">Contact Us</a>
-                                            </li>
+                                            <li> <a href="{{ route('services.page') }}">Our Services </a></li>
+                                            <li><a href="{{ route('contact.page') }}">Contact Us</a></li>
                                             <li><a href="{{ route('enrollment') }}">Enrollment</a></li>
-
-                                            <!-- Button -->
                                             <li class="button-header margin-left ">
-                                                <a href="{{ url('certificate') }}"
-                                                    class="btn">Verify Certificate</a></li>
+                                                <a href="{{ url('certificate') }}" class="btn">Verify Certificate</a>
+                                                </li>
                                         </ul>
                                     </nav>
                                 </div>

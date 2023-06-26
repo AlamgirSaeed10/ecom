@@ -1,5 +1,5 @@
-@extends('includes.master')
-@section('title', $title)
+@extends('layout.master', ['activePage' => 'about'])
+@section('title','About')
 @section('content')
     <header>
         <!-- Header Start -->
@@ -61,8 +61,8 @@
                                     <!-- breadcrumb Start-->
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="{{ route('home.page') }}">Home</a></li>
-                                            <li class="breadcrumb-item"><a href="{{ route('about.page') }}">about</a></li>
+                                            <li class="breadcrumb-item"><a href="{{ route('about.page') }}">Home</a></li>
+                                            {{-- <li class="breadcrumb-item"><a href="{{ route('about.page') }}">about</a></li> --}}
                                         </ol>
                                     </nav>
                                     <!-- breadcrumb End -->
@@ -503,7 +503,7 @@
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
                                     <div class="footer-logo mb-25">
-                                        <a href="{{ route('home.page') }}"><img
+                                        <a href="{{ route('about.page') }}"><img
                                                 src="{{ url('/public') }}/assets/img/logo/logo2_footer.png"
                                                 alt=""></a>
                                     </div>

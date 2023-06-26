@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/icon/gladiator-fevicon.png')}}">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
+    <!--<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/slicknav.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css')}}">

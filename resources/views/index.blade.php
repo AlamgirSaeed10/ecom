@@ -1,4 +1,5 @@
 @extends('include.master')
+@section('title',$title)
 @section('content')
 <!--? slider Area Start-->
 <section class="slider-area ">
