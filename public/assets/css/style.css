@@ -2978,7 +2978,7 @@ hr {
 }
 
 .mobile_menu .slicknav_menu .slicknav_nav {
-    margin-top: 20px !important;
+    /*margin-top: 20px !important;*/
     background: #4a148c;
 }
 
@@ -3091,7 +3091,8 @@ hr {
 }
 
 .slider-area, .slider-area2 {
-    background-image: url(../img/hero/h1_hero.png);
+    background-image: url(https://www.atslifesciences.com/wp-content/uploads/sites/26/2021/12/shutterstock_618296717.jpg?resize=2048,892);
+    /*background-image: url(../img/hero/h1_hero.png);*/
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center
@@ -7512,11 +7513,20 @@ a:hover{
     cursor: pointer;
 }
 
-.secp_reg{
+.secp_reg {
+   
     background-color: #f9fcfe;
     border-radius: 5%;
     padding: 10px;
 }
+
+/*@media screen and (max-width: 785px) {*/
+/*    .secp_reg {*/
+/*        height: 150px;*/
+/*        width: 150px;*/
+/*    }*/
+/*}*/
+
 
 div#course_selected{
     margin-top: 5px;

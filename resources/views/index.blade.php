@@ -1,7 +1,11 @@
-@extends('include.master')
+@extends('include.master', ['activePage' => 'home'])
 @section('title',$title)
 @section('content')
-<!--? slider Area Start-->
+    <head>
+        <link rel="stylesheet" href="{{asset('assets/css/tm-swiper-bundle.min.css')}}" />
+        <link rel="stylesheet" href="{{asset('assets/css/tm-style.css')}}" />
+        <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"  rel="stylesheet" />
+    </head>
 <section class="slider-area ">
     <div class="slider-active">
         <!-- Single Slider -->
@@ -10,13 +14,11 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-7 col-md-12">
                         <div class="hero__caption">
-                            <h1 data-animation="fadeInLeft" data-delay="0.2s">Online and On-site learning<br>
-                                platform.</h1>
-                            <p data-animation="fadeInLeft" data-delay="0.4s">Learn the top income generating courses
-                                and make your dreams come true.</p>
+                            <h1 data-animation="fadeInLeft" data-delay="0.2s">Global E-commerce Business</h1>
+                            <p data-animation="fadeInLeft" data-delay="0.4s">Expand your e-commerce presence globally and drive your business toward unprecedented growth</p>
                                 {{-- <button type="submit" class="button button-contactForm boxed-btn">Send</button> --}}
-                                <a href="{{url('enrollment')}}" class="btn hero-btn"
-                                data-animation="fadeInLeft" data-delay="0.7s">Enroll Now!</a>
+                                <a href="{{route('services.page')}}" class="btn hero-btn"
+                                data-animation="fadeInLeft" data-delay="0.7s">Get a Quote!</a>
                         </div>
                     </div>
                 </div>
@@ -24,7 +26,6 @@
         </div>
     </div>
 </section>
-<!-- ? services-area -->
 <div class="services-area">
     <div class="container">
         <div class="row justify-content-sm-center">
@@ -64,7 +65,6 @@
         </div>
     </div>
 </div>
-<!--? About Area-1 Start -->
 <section class="about-area1 fix pt-10">
     <div class="support-wrapper align-items-center">
         <div class="left-content1">
@@ -89,7 +89,6 @@
         </div>
     </div>
 </section>
-<!--? Team -->
 <section class="team-area padding-bt-50 fix">
     <div class="container">
         <div class="row justify-content-center">
@@ -143,11 +142,18 @@
 
                     </div>
                 </div>
+                <div class="col-lg-4">
+                    <div class="single-cat text-center">
+                        <div class="cat-icon">
+                            <img src="{{asset('assets/img/gallery/N_ayesha.jpeg')}}" alt="" class="w-100">
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
-<!-- About Area End -->
 <div class="topic-area pb-50">
     <div class="container">
         <div class="row justify-content-center">
@@ -270,6 +276,77 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+<!-- TESTIMONIAL SECTIOM-->
+<!--<section class="container-tm mt-100">-->
+<!--    <div class="testimonial mySwiper">-->
+<!--        <div class="testi-content swiper-wrapper">-->
+<!--            <div class="slide swiper-slide">-->
+<!--                <img src="{{asset('assets/img/icon/user-icon.png')}}" alt="" class="image" />-->
+<!--                <p>-->
+<!--                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam,-->
+<!--                    saepe provident dolorem a quaerat quo error facere nihil deleniti-->
+<!--                    eligendi ipsum adipisci, fugit, architecto amet asperiores-->
+<!--                    doloremque deserunt eum nemo.-->
+<!--                </p>-->
+
+<!--                <i class="bx bxs-quote-alt-left tm-quote-icon"></i>-->
+
+<!--                <div class="details">-->
+<!--                    <span class="name">Marnie Lotter</span>-->
+<!--                    <span class="job">Web Developer</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="slide swiper-slide">-->
+<!--                <img src="{{asset('assets/img/icon/user-icon.png')}}" alt="" class="image" />-->
+<!--                <p>-->
+<!--                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam,-->
+<!--                    saepe provident dolorem a quaerat quo error facere nihil deleniti-->
+<!--                    eligendi ipsum adipisci, fugit, architecto amet asperiores-->
+<!--                    doloremque deserunt eum nemo.-->
+<!--                </p>-->
+
+<!--                <i class="bx bxs-quote-alt-left tm-quote-icon"></i>-->
+
+<!--                <div class="details">-->
+<!--                    <span class="name">Marnie Lotter</span>-->
+<!--                    <span class="job">Web Developer</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="slide swiper-slide">-->
+<!--                <img src="{{asset('assets/img/icon/user-icon.png')}}" alt="" class="image" />-->
+<!--                <p>-->
+<!--                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam,-->
+<!--                    saepe provident dolorem a quaerat quo error facere nihil deleniti-->
+<!--                    eligendi ipsum adipisci, fugit, architecto amet asperiores-->
+<!--                    doloremque deserunt eum nemo.-->
+<!--                </p>-->
+
+<!--                <i class="bx bxs-quote-alt-left tm-quote-icon"></i>-->
+
+<!--                <div class="details">-->
+<!--                    <span class="name">Marnie Lotter</span>-->
+<!--                    <span class="job">Web Developer</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <!--<div class="swiper-button-next nav-btn"></div>-->
+        <!--<div class="swiper-button-prev nav-btn"></div>-->
+<!--        <div class="swiper-pagination"></div>-->
+<!--    </div>-->
+<!--</section>-->
+
+
+
+
+
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -424,4 +501,24 @@
     </div>
 </div>
 
+
+
+<script src="{{asset('assets/js/tm-swiper-bundle.min.js')}}"></script>
+<script>
+   var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    grabCursor: true,
+    autoplay: {
+        delay: 3000, 
+        disableOnInteraction: false 
+    },
+    loop: true,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+});
+
+
+</script>
 @endsection

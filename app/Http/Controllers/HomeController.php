@@ -8,7 +8,7 @@ use App\Mail\ContactUsMail;
 use App\Mail\SendMail;
 use App\Models\Contact;
 use App\Models\Enrollment;
-use Exception;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -16,22 +16,24 @@ use Illuminate\Support\Str;
 use App\Http\Requests\EnrollmentRequest;
 use App\Http\Requests\MaintenanceRequest;
 use Illuminate\Support\Facades\Validator;
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 class HomeController extends Controller
 {
     public function index()
     {
-        $title ="Index"; 
+        $title ="We empower entrepreneurs"; 
         return view('index',compact('title'));
     }
     public function courses()
     {
-        $title ="Our Courses"; 
+        $title ="Courses"; 
         return view('courses',compact('title'));
     }
     public function services()
     {
-        $title ="Our Services"; 
+        $title ="Services"; 
         return view('services',compact('title'));
     }
     public function about()
@@ -46,93 +48,112 @@ class HomeController extends Controller
     }
     public function sitemap()
     {
-        $title ="Our Sitemap"; 
+        $title ="Sitemap"; 
         return view('sitemap',compact('title'));
     }
-
-    public function post_enrollment(EnrollmentRequest $request)
+    public function privacy_policy()
     {
-        if (!$request->validated()) {
-
-            $errors = $request->errors();
-            return response()->json(['errors' => $errors]);
-        }
-        $data = $request->all();
-        foreach ($request->course_selected as $course_selected) {
-            if (!is_null($course_selected)) {
-                $course_id[] = $course_selected;
-            }
-        }
-        $data['course_id'] = ucwords(json_encode($course_id));
-        $data['enrollment_code'] = 'enc-' . random_int(10000000000, 99999999999);
-        $data['status'] = "Pending";
-        // dd($course_id);
-        if ($request->file('attach_doc')) {
-            $attach_doc = $request->file('attach_doc');
-            $path = $attach_doc->store('temp');
-            // $file = public_path('attachments/'.$request->attach_doc);
-        }
-        // dd($data);
-        $enrollment = Enrollment::create($data);
-        $enrollment->update(['course_id' => $data['course_id']]);
-        if ($enrollment) {
-            if ($request->file('attach_doc')) {
-                $mail = Mail::to(env('MAIL_FROM_ADDRESS'))->send((new SendMail($data))->attach(
-                    $attach_doc->getRealPath(),
-                    [
-                        'as' => $attach_doc->getClientOriginalName(),
-                        'mime' => $attach_doc->getClientMimeType(),
-                    ]
-                ));
-                // $mail->attach(storage_path('app/' . $path), [
-                //     'as' => $attach_doc->getClientOriginalName(),
-                //     'mime' => $attach_doc->getClientMimeType(),
-                // ]);
-                // Delete the temporary file
-                Storage::delete($path);
-            } else {
-                Mail::to(env('MAIL_FROM_ADDRESS'))->send(new SendMail($data));
-            }
-        }
-        // toastr()->success('Your enrollement has done successfully, we will contact you soon.');
-        return view('enrollment');
+        $title ="Privacy Policy"; 
+        return view('privacy_policy',compact('title'));
     }
-    public function contact()
+   
+    public function get_quote(Request $request)
     {
+        $data = array(
+            'cname' => $request->cname,
+            'cemail' => $request->cemail,
+            'ccontact' => $request->ccontact,
+            'cbudget' => $request->cbudget,
+            'cselectservice' => $request->cselectservice,
+            'camazonaccount' => $request->camazonaccount,
+            'crequired' => $request->crequired
+            );
+            
+             $mail = new PHPMailer(true);
+        try {
+            $mail->SMTPDebug = 0; // Enable verbose debug output
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'muhammadalamgir10@gmail.com';
+            $mail->Password = 'znensgwmxpgeflzi';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom('admission@ecomgladiators.com', 'Ecom Gladiators');
+            
+                $mail->addAddress("muhammadalamgir10@gmail.com",$request->cname);
+                $mail->Subject = 'Request for Quotetaion from ' . $request->cname;
+              
+                $mail->Body  = "Name: {$data['cname']}<br>";
+                $mail->Body .= "Email: {$data['cemail']}<br>";
+                $mail->Body .= "Contact: {$data['ccontact']}<br>";
+                $mail->Body .= "Budget: {$data['cbudget']}<br>";
+                $mail->Body .= "Service: {$data['cselectservice']}<br>";
+                $mail->Body .= "Amazon Account: {$data['camazonaccount']}<br>";
+                $mail->Body .= "Requirements: {$data['crequired']}<br>";
+    
+                $mail->isHTML(true);
+                $mail->send();
+                $mail->ClearAddresses();
+
+            return redirect()->back()->with('success','Thank you for your submission. Our sales representative will contact you shortly');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success','Email could not be sent. Error: ', $mail->ErrorInfo);
+        }
+        return redirect()->back()->with('success','Our team will contact you shortly... Please be patient.');
+    }
+    public function contact(){
         $title="Contact Us";
         return view('contact',compact('title'));
     }
-    public function contact_us_mail(ContactRequest $request)
-    {
-        if (!$request->validated()) {
-            // return response()->json(['success' => $request->all()]);
-            $errors = $request->errors();
-            return response()->json(['errors' => $errors]);
-        }
+    public function contact_us(Request $request){
 
-        $data = $request->all();
-        $contact = Contact::create($data);
-        if ($contact) {
-            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($data));
-        }
+    $name = $request->name;
+    $email = $request->email;
+    $subject = $request->subject;
+    $phone = $request->phone;
+    $message = $request->message;
 
-        return redirect()->back()
-            ->with(['success' => 'Thank you for contacting us. We will contact you shortly.']);
-    }
-    public function maintenance()
-    {
-        return view('maintenance');
-    }
-    public function contactUsEmail(MaintenanceRequest $request)
-    {
-        if (!$request->validated()) {
-            // return response()->json(['success' => $request->all()]);
-            $errors = $request->errors();
-            return response()->json(['errors' => $errors]);
-        }
+       $mail = new PHPMailer(true);
+              try {
+                  $mail->SMTPDebug = 0; // Enable verbose debug output
+                  $mail->isSMTP();
+                  $mail->Host = 'smtp.gmail.com';
+                  $mail->SMTPAuth = true;
+                  $mail->Username = 'muhammadalamgir10@gmail.com';
+                  $mail->Password = 'znensgwmxpgeflzi';
+                  $mail->SMTPSecure = 'tls';
+                  $mail->Port = 587;
 
-        // Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactUsMail($validated));
-        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactUsMail($request->all()));
-        return redirect()->back()->with('success', 'Thank you for contacting us. We will contact you shortly.');
+                  $mail->setFrom('admission@ecomgladiators.com', 'Ecom Gladiators');
+
+                     $mail->addAddress("muhammadalamgir10@gmail.com",$request->name);
+                     $mail->Subject = 'Request for Quotation from ' . $request->name;
+                     $mail->Body .= "name: {$request->name}<br>";
+                     $mail->Body .= "email: {$request->email}<br>";
+                     $mail->Body .= "subject: {$request->subject}<br>";
+                     $mail->Body .= "phone: {$request->phone}<br>";
+                     $mail->Body .= "message: {$request->message}<br>";
+
+                      $mail->isHTML(true);
+                      $mail->send();
+                      $mail->ClearAddresses();
+
+                  return redirect()->back()->with('success','Thank you for your submission. Our sales representative will contact you shortly');
+              } catch (Exception $e) {
+                  return redirect()->back()->with('success','Email could not be sent. Error: ', $mail->ErrorInfo);
+              }
+              return redirect()->back()->with('success','Our team will contact you shortly... Please be patient.');
     }
+    public function maintenance(){
+        $title = "Maintenance";
+        return view('maintenance',compact('title'));
+    }
+
+
+
+
+
+
 }

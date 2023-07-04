@@ -5,7 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use DB;
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 class EnrollmentController extends Controller
 {
 
@@ -55,12 +57,50 @@ class EnrollmentController extends Controller
    if(count($en_data) > 0 && count($inv_data) > 0){
         DB::table('enrollment')->insert($en_data);
         DB::table('course_payment')->insert($inv_data);
-        return redirect()->route('enrollment')->with('success', 'Enrollment created successfully');
-    }
-     else{
-        return redirect()->route('enrollment')->with('error', 'Error During enrollment... Please contact administrator');
-    }
 
-    }
+
+    $mail = new PHPMailer(true);
+                  try {
+                      $mail->SMTPDebug = 1; // Enable verbose debug output
+                      $mail->isSMTP();
+                      $mail->Host = 'smtp.gmail.com';
+                      $mail->SMTPAuth = true;
+                      $mail->Username = 'muhammadalamgir10@gmail.com';
+                      $mail->Password = 'znensgwmxpgeflzi';
+                      $mail->SMTPSecure = 'tls';
+                      $mail->Port = 587;
+
+                      $mail->setFrom('admission@ecomgladiators.com', 'Ecom Gladiators');
+
+                         $mail->addAddress("muhammadalamgir10@gmail.com",$request->name);
+                         $mail->Subject = 'Student Enrollment Form ' . $request->name;
+                        $mail->Body .= "Plan ID: " . $en_data['PlanID'] . "<br>";
+                        $mail->Body .= "Course Code: " . $en_data['CourseCode'] . "<br>";
+                        $mail->Body .= "Student ID: " . $en_data['StudentID'] . "<br>";
+                        $mail->Body .= "Student Name: " . $en_data['StudentName'] . "<br>";
+                        $mail->Body .= "Father's Name: " . $en_data['FatherName'] . "<br>";
+                        $mail->Body .= "Student CNIC: " . $en_data['StudentCNIC'] . "<br>";
+                        $mail->Body .= "Student Phone: " . $en_data['StudentPhone'] . "<br>";
+                        $mail->Body .= "Student City: " . $en_data['StudentCity'] . "<br>";
+                        $mail->Body .= "Student Email: " . $en_data['StudentEmail'] . "<br>";
+                        $mail->Body .= "Student Gender: " . $en_data['StudentGender'] . "<br>";
+                        $mail->Body .= "Training Mode: " . $en_data['TrainingMode'] . "<br>";
+                        $mail->Body .= "Payment Option: " . $en_data['PaymentOption'] . "<br>";
+                        $mail->Body .= "How did you know about us? " . $en_data['KnowAboutUs'] . "<br>";
+
+
+                          $mail->isHTML(true);
+                          $mail->send();
+                          $mail->ClearAddresses();
+
+                    //   return redirect()->back()->with('success', 'Enrollment created successfully');
+                       return view('index')->with('success','Your have Enrolled successfully. Out team will contact you shortly!  ');
+                  } catch (Exception $e) {
+                      return redirect()->back()->with('success','Email could not be sent. Error: ', $mail->ErrorInfo);
+                  }
+                  }
+                  return redirect()->back()->with('success','Our team will contact you shortly... Please be patient.');
+
+}
 
 }

@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 my-auto">
                         <div class="single-footer-caption">
-                            <div class="single-footer-caption">
+                            <div class="single-footer-caption" style="height:150px; width:150px;">
                                 <!-- logo -->
                                 <a href="https://eservices.secp.gov.pk/eServices/ControllerServlet?request_id=VERIFY_ONLINE_INCORP_CERT&id=0208828"
                                     target="_blank">

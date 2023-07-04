@@ -1,4 +1,4 @@
-@extends('includes.master')
+@extends('include.master', ['activePage' => 'about'])
 @section('title', $title)
 @section('content')
     <header>

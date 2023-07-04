@@ -1,4 +1,4 @@
-@extends('include.master')
+@extends('include.master', ['activePage' => 'sitemap'])
 @section('title', $title)
 @section('content')
  <style>

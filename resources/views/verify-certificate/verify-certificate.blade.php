@@ -1,4 +1,4 @@
-@extends('include.master')
+@extends('include.master',['activePage' => 'certificate'])
 @section('content')
 <section class="py-5 mt-100">
             <div class="container">

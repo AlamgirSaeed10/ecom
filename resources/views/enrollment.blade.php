@@ -1,4 +1,4 @@
-@extends('include.master')
+@extends('include.master', ['activePage' => 'enrollment'])
 @section('title',$title)
 @section('content')
 <section class="py-5 mt-100">
@@ -205,6 +205,19 @@
                                         certificate after the
                                         successful analysis test results.</p>
                                 </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12 mt-10">
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="terms" id="terms_check" required>
+                <label class="form-check-label" for="terms_check">
+                    &nbsp; I accept the terms and conditions
+                </label>
+            </div>
+            @error('terms')
+            <span class="text-danger">Please accept the terms and conditions to proceed</span>
+            @enderror
+        </div>
+    </div>
                                 <div class="form-group mt-3">
                                     <button type="submit" class="btn btn-buy" id="enroll_now_btn">Enroll Now</button>
                                     {{-- <button type="submit" class="button button-contactForm boxed-btn">Send</button> --}}

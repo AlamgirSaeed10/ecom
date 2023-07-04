@@ -24,3 +24,4 @@
 [25-Jun-2023 18:43:49 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 16384 bytes) in /home1/uhirujmy/public_html/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php on line 52
 [25-Jun-2023 18:43:54 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 16384 bytes) in /home1/uhirujmy/public_html/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php on line 52
 [25-Jun-2023 18:50:04 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 32768 bytes) in /home1/uhirujmy/public_html/storage/framework/views/33f3d7d44a08f8a80b8c88b702fecee7.php on line 1
+[26-Jun-2023 15:28:19 UTC] PHP Fatal error:  Cannot use PHPMailer\PHPMailer\Exception as Exception because the name is already in use in /home1/uhirujmy/public_html/app/Http/Controllers/HomeController.php on line 20

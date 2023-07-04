@@ -1,4 +1,4 @@
-@extends('include.master')
+@extends('include.master', ['activePage' => 'contact'])
 @section('title',$title)
 @section('content')
     <section class="py-5 mt-100">
@@ -18,7 +18,7 @@
                             {{Session::get('success')}}
                         </div>
                     @endif
-                    <form class="form-contact contact_form" action="#" method="POST" id="contact_us_form">
+                    <form class="form-contact contact_form" action="{{route('contact_us')}}" method="POST" id="contact_us_form">
                         @csrf
                         <div class="row">
                             <div class="col-sm-6">
@@ -79,7 +79,7 @@
                         <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                         <div class="media-body">
                             <a href="tel:+923190143276"><h3>+92 319 0143276</h3></a>
-                            <p>Mon to Sat<br>10:00AM - 5:00PM (Onsite)<br>09:00PM - 3:00AM (Online)</p>
+                            <p>Mon to Fri<br>10:00AM - 5:00PM (Onsite)<br>09:00PM - 3:00AM (Online)</p>
                         </div>
                     </div>
                     <div class="media contact-info">

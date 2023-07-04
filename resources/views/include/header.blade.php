@@ -37,16 +37,32 @@
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-lg-block">
                                     <nav>
-                                        <ul id="navigation">
-                                            <li class="active"><a href="{{ route('about.page') }}">About Us</a></li>
-                                            <li> <a href="{{ route('courses.page') }}">Courses </a></li>
-                                            <li> <a href="{{ route('services.page') }}">Our Services </a></li>
-                                            <li><a href="{{ route('contact.page') }}">Contact Us</a></li>
-                                            <li><a href="{{ route('enrollment') }}">Enrollment</a></li>
-                                            <li class="button-header margin-left ">
-                                                <a href="{{ url('certificate') }}" class="btn">Verify Certificate</a>
-                                                </li>
+                                        
+                                        
+                                          <ul id="navigation">
+                                            <li class="{{ $activePage == 'home' ? 'active' : '' }}">        <a class="" href="{{ route('about.page') }}">About Us</a></li>
+                                            <li class="{{ $activePage == 'courses' ? 'active' : '' }}">     <a class="" href="{{ route('courses.page') }}">Courses</a></li>
+                                            <li class="{{ $activePage == 'enrollment' ? 'active' : '' }}">  <a class="" href="{{ route('enrollment') }}">Enrollment</a></li>
+                                            <li class="{{ $activePage == 'services' ? 'active' : '' }}">    <a class="" href="{{ route('services.page') }}">Services</a> </li>
+                                            <li class="{{ $activePage == 'contact' ? 'active' : '' }}">     <a class="" href="{{ route('contact.page') }}">Contact-Us</a> </li>
+                                            
+                                            
+                                            
+                                            <li class="button-header margin-left "><a href="{{ url('certificate') }}" class="btn">Verify Certificate</a> </li>
                                         </ul>
+                                        
+                                        
+                                        <!--<ul id="navigation">-->
+                                        <!--    <li class="nav-itme"> <a class="nav-i {{ request()->routeIs('/') ? 'active':'' }}" href="{{ route('about.page') }}">About Us</a></li>-->
+                                        <!--    <li class="nav-itme"> <a class="nav-i {{ request()->routeIs('courses.page') ? 'active':'' }}" href="{{ route('courses.page') }}">Courses </a></li>-->
+                                        <!--    <li class="nav-itme"> <a class="nav-i {{ request()->routeIs('services.page') ? 'active':'' }}" href="{{ route('services.page') }}">Services </a></li>-->
+                                        <!--    <li class="nav-itme"> <a class="nav-i {{ request()->routeIs('enrollment') ? 'active':'' }}" href="{{ route('enrollment') }}">Enrollment</a></li>-->
+                                        <!--    <li class="nav-itme"> <a class="nav-i {{ request()->routeIs('contact.page') ? 'active':'' }}" href="{{ route('contact.page') }}">Contact Us</a></li>-->
+                                            
+                                        <!--    <li class="button-header margin-left ">-->
+                                        <!--        <a href="{{ url('certificate') }}" class="btn">Verify Certificate</a>-->
+                                        <!--        </li>-->
+                                        <!--</ul>-->
                                     </nav>
                                 </div>
                             </div>
